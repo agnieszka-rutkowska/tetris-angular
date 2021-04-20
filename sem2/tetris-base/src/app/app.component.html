@@ -1,7 +1,3 @@
 
-<app-form *ngIf="appState === states.INTRO"
-  (submit)="onFormSubmit($event)"></app-form>
+<router-outlet></router-outlet>
 
-<app-game *ngIf="appState === states.GAME"
-  [playerData]="player"
-  (close)="onGameClosed()"></app-game>

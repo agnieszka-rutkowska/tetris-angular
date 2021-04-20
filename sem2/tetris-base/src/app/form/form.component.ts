@@ -1,23 +1,24 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {Player} from '../app.component';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Output() submit = new EventEmitter<Player>();
+  constructor(private router: Router, private storage: StorageService) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   submitForm(form: FormGroup) {
-    this.submit.emit(form.value);
+    this.openGame();
+    this.storage.savePlayerData(form.value);
   }
 
+  openGame() {
+    this.router.navigate(['/game']);
+  }
 }

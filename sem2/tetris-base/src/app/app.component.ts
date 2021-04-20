@@ -1,9 +1,4 @@
-import {Component} from '@angular/core';
-
-enum STATES {
-  INTRO,
-  GAME
-}
+import { Component } from '@angular/core';
 
 export interface Player {
   name: string;
@@ -13,21 +8,14 @@ export interface Player {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public states = STATES;
-  public appState = STATES.INTRO;
-
   public player: Player;
 
+  constructor() {}
 
   public onFormSubmit(playerData) {
     this.player = playerData;
-    this.appState = STATES.GAME;
-  }
-
-  public onGameClosed() {
-    this.appState = STATES.INTRO;
   }
 }

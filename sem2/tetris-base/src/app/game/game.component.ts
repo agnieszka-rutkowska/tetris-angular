@@ -1,28 +1,28 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Player} from '../app.component';
+import { Component, OnInit } from '@angular/core';
+import { Player } from '../app.component';
+import { Router } from '@angular/router';
+import { StorageService } from '../storage.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
-  @Input() playerData: Player;
-  @Output() close = new EventEmitter();
+  playerData: Player;
   public points = 0;
 
-
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private router: Router, private storage: StorageService) {
+    this.playerData = this.storage.readplayerData();
   }
+
+  ngOnInit(): void {}
 
   onLineCleared() {
     this.points++;
   }
 
   closeGame() {
-    this.close.emit();
+    this.router.navigate(['/form']);
   }
-
 }
