@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { TetrisCoreModule } from 'ngx-tetris';
 import { RouterModule } from '@angular/router';
 import { ScoreComponent } from './score/score.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, FormComponent, GameComponent, ScoreComponent],
@@ -15,6 +16,7 @@ import { ScoreComponent } from './score/score.component';
     BrowserModule,
     FormsModule,
     TetrisCoreModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: 'form', component: FormComponent },
       { path: 'game', component: GameComponent },

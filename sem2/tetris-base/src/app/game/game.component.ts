@@ -11,12 +11,15 @@ import { StorageService } from '../storage.service';
 export class GameComponent implements OnInit {
   playerData: Player;
   public points = 0;
+  public data = [];
 
   constructor(private router: Router, private storage: StorageService) {
     this.playerData = this.storage.readplayerData();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getHighScore();
+  }
 
   onLineCleared() {
     this.points++;
@@ -24,5 +27,14 @@ export class GameComponent implements OnInit {
 
   closeGame() {
     this.router.navigate(['/form']);
+  }
+
+  getHighScore() {
+    console.log('ttttt');
+    this.storage.load().subscribe((result) => {
+      console.log(result);
+      this.data = result['data'];
+      console.log('ok', this.data);
+    });
   }
 }
