@@ -13,6 +13,8 @@ Hello <strong>{{ playerData.name }}</strong> <br/>
 <button (click)="game.actionLeft()">Left</button>
 <button (click)="game.actionRight()">Right</button>
 <button (click)="game.actionDown()">Down</button>
+<button (click)="endGame()">End game</button>
+<br>
 <button (click)="sortPlayers()">Sort</button>
 <div *ngFor="let player of data, let i = index">
     <div *ngIf="i < 10">

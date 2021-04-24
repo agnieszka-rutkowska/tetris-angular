@@ -9,9 +9,10 @@ import { TetrisCoreModule } from 'ngx-tetris';
 import { RouterModule } from '@angular/router';
 import { ScoreComponent } from './score/score.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MyscoreComponent } from './myscore/myscore.component';
 
 @NgModule({
-  declarations: [AppComponent, FormComponent, GameComponent, ScoreComponent],
+  declarations: [AppComponent, FormComponent, GameComponent, ScoreComponent, MyscoreComponent],
   imports: [
     BrowserModule,
     FormsModule,

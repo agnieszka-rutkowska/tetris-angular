@@ -1,28 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Player } from '../app.component';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import { WritePropExpr } from '@angular/compiler';
-import { timeStamp } from 'node:console';
+import {interval} from 'rxjs';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   playerData: Player;
   public points = 0;
   public data = [];
   public isSortDesc = true;
+  @ViewChild('game') game:ElementRef;
+  const source = interval(30000);
+  const subscribeGetHightscore;
 
   constructor(private router: Router, private storage: StorageService) {
     this.playerData = this.storage.readplayerData();
-    //this.playerData = { name: 'aga', email: 'wp@wp.pl' };
+    // this.playerData = { name: 'aga', token:"1234" };
   }
 
   ngOnInit(): void {
+    this.subscribeGetHightscore = this.source.subscribe(() => this.getHighScore());
     this.getHighScore();
+  }
+
+  ngOnDestroy() {
+    console.log("#ngOnDestroy");
+    this.subscribeGetHightscore.unsubscribe();
   }
 
   onLineCleared() {
@@ -34,6 +42,7 @@ export class GameComponent implements OnInit {
   }
 
   getHighScore() {
+    console.log("# ", Date().toString());
     this.storage.load().subscribe((result) => {
       this.data = result;
       this.data.sort((a, b) => b.score - a.score);
@@ -48,5 +57,14 @@ export class GameComponent implements OnInit {
       this.data.sort((a, b) => b.score - a.score);
       this.isSortDesc = true;
     }
+  }
+
+  endGame(){
+    this.game.actionStop();
+    this.storage.saveScore(this.playerData.name, this.points, this.playerData.token).subscribe((result) => {
+      this.data = result;
+      this.data.sort((a, b) => b.score - a.score);
+    });
+    console.log("end");
   }
 }

@@ -20,23 +20,35 @@ export class StorageService {
   }
 
   load(): Observable<any> {
-    let headers = new HttpHeaders({
+    const headers = new HttpHeaders({
       accept: 'application/json',
     });
 
-    let options = { headers: headers };
+    const options = { headers: headers };
 
     const URL = 'http://tetris.chrum.it/scores';
     return this._http.get<any>(URL, options);
   }
 
   checkToken(token: string) {
-    let headers = new HttpHeaders({
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
     const body = { 'auth-token': token };
-    let options = { headers: headers };
+    const options = { headers: headers };
     const URL = 'http://tetris.chrum.it/check-token';
+
+    return this._http.post(URL, body, options);
+  }
+
+  saveScore(name: string, score: number, token: string){
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      // 'Authorization': 'Bearer ' + token,
+    });
+    const body = { 'name': name, 'score': score };
+    const options = { headers: headers };
+    const URL = 'http://tetris.chrum.it/scores';
 
     return this._http.post(URL, body, options);
   }
