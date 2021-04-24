@@ -20,10 +20,10 @@ export class StorageService {
   }
   load(): Observable<any> {
     let headers = new HttpHeaders({
-      'Content-Type': 'application/json; charset=utf-8',
+      'accept': 'application/json',
     });
 
-    let options = { headers: headers};
+    let options = { headers: headers };
     console.log('option', options);
 
     const URL = 'http://tetris.chrum.it/scores';

@@ -13,3 +13,9 @@ Hello <strong>{{ playerData.name }}</strong> <br/>
 <button (click)="game.actionLeft()">Left</button>
 <button (click)="game.actionRight()">Right</button>
 <button (click)="game.actionDown()">Down</button>
+<button (click)="sortPlayers()">Sort</button>
+<div *ngFor="let player of data, let i = index">
+    <div *ngIf="i < 10">
+        <b>{{i+1}}. </b> <span>{{player.name}} {{player.score}}</span>
+    </div>
+</div>

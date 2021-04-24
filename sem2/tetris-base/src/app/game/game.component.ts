@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from '../app.component';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
+import { WritePropExpr } from '@angular/compiler';
+import { timeStamp } from 'node:console';
 
 @Component({
   selector: 'app-game',
@@ -12,9 +14,11 @@ export class GameComponent implements OnInit {
   playerData: Player;
   public points = 0;
   public data = [];
+  public isSortDesc = true;
 
   constructor(private router: Router, private storage: StorageService) {
-    this.playerData = this.storage.readplayerData();
+    // this.playerData = this.storage.readplayerData();
+    this.playerData = { name: 'aga', email: 'wp@wp.pl' };
   }
 
   ngOnInit(): void {
@@ -30,11 +34,19 @@ export class GameComponent implements OnInit {
   }
 
   getHighScore() {
-    console.log('ttttt');
     this.storage.load().subscribe((result) => {
-      console.log(result);
-      this.data = result['data'];
-      console.log('ok', this.data);
+      this.data = result;
+      this.data.sort((a, b) => b.score - a.score);
     });
+  }
+
+  sortPlayers() {
+    if (this.isSortDesc) {
+      this.data.sort((a, b) => a.score - b.score);
+      this.isSortDesc = false;
+    } else {
+      this.data.sort((a, b) => b.score - a.score);
+      this.isSortDesc = true;
+    }
   }
 }
