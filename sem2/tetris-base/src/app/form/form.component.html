@@ -10,12 +10,12 @@
 
   <br/>
 
-  <label>Your email:</label>
-  <input ngModel #email="ngModel" name="email" type="text"
+  <label>Your token:</label>
+  <input ngModel #token="ngModel" name="token" type="text"
          required
-         email/>
-  <div *ngIf="email.touched && email.valid === false">
-    Incorrect email
+         />
+  <div *ngIf="token.touched && token.valid === false">
+    Token required
   </div>
 
   <br/>

@@ -17,8 +17,8 @@ export class GameComponent implements OnInit {
   public isSortDesc = true;
 
   constructor(private router: Router, private storage: StorageService) {
-    // this.playerData = this.storage.readplayerData();
-    this.playerData = { name: 'aga', email: 'wp@wp.pl' };
+    this.playerData = this.storage.readplayerData();
+    //this.playerData = { name: 'aga', email: 'wp@wp.pl' };
   }
 
   ngOnInit(): void {

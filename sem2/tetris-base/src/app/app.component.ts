@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 export interface Player {
   name: string;
-  email: string;
+  token: string;
 }
 
 @Component({

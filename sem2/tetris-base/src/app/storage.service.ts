@@ -18,16 +18,26 @@ export class StorageService {
   savePlayerData(data: Player) {
     this.playerData = data;
   }
+
   load(): Observable<any> {
     let headers = new HttpHeaders({
-      'accept': 'application/json',
+      accept: 'application/json',
     });
 
     let options = { headers: headers };
-    console.log('option', options);
 
     const URL = 'http://tetris.chrum.it/scores';
-    // const URL = 'https://jsonplaceholder.typicode.com/todos/1';
     return this._http.get<any>(URL, options);
+  }
+
+  checkToken(token: string) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const body = { 'auth-token': token };
+    let options = { headers: headers };
+    const URL = 'http://tetris.chrum.it/check-token';
+
+    return this._http.post(URL, body, options);
   }
 }

@@ -1,3 +1,4 @@
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,7 +15,12 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {}
 
   submitForm(form: FormGroup) {
-    this.openGame();
+    this.storage.checkToken(form.value.token).subscribe((result) => {
+      console.log(result);
+      if (result.success == true) {
+        this.openGame();
+      }
+    });
     this.storage.savePlayerData(form.value);
   }
 
