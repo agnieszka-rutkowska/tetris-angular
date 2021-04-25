@@ -1,8 +1,14 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Player } from '../app.component';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage.service';
-import {interval} from 'rxjs';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -12,24 +18,26 @@ import {interval} from 'rxjs';
 export class GameComponent implements OnInit, OnDestroy {
   playerData: Player;
   public points = 0;
-  public data = [];
+  public data: any;
   public isSortDesc = true;
-  @ViewChild('game') game:ElementRef;
-  const source = interval(30000);
-  const subscribeGetHightscore;
+  @ViewChild('game') game: ElementRef;
+  source = interval(30000);
+  subscribeGetHightscore;
 
   constructor(private router: Router, private storage: StorageService) {
-    this.playerData = this.storage.readplayerData();
-    // this.playerData = { name: 'aga', token:"1234" };
+    // this.playerData = this.storage.readplayerData();
+    this.playerData = { name: 'aga', token: '1234' };
   }
 
   ngOnInit(): void {
-    this.subscribeGetHightscore = this.source.subscribe(() => this.getHighScore());
+    this.subscribeGetHightscore = this.source.subscribe(() =>
+      this.getHighScore()
+    );
     this.getHighScore();
   }
 
   ngOnDestroy() {
-    console.log("#ngOnDestroy");
+    console.log('#ngOnDestroy');
     this.subscribeGetHightscore.unsubscribe();
   }
 
@@ -42,7 +50,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   getHighScore() {
-    console.log("# ", Date().toString());
+    console.log('# ', Date().toString());
     this.storage.load().subscribe((result) => {
       this.data = result;
       this.data.sort((a, b) => b.score - a.score);
@@ -59,12 +67,15 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  endGame(){
+  endGame() {
     this.game.actionStop();
-    this.storage.saveScore(this.playerData.name, this.points, this.playerData.token).subscribe((result) => {
-      this.data = result;
-      this.data.sort((a, b) => b.score - a.score);
-    });
-    console.log("end");
+    // this.storage
+    //   .saveScore(this.playerData.name, this.points, this.playerData.token)
+    //   .subscribe((result) => {
+    //     this.data = result;
+    //     this.data.sort((a, b) => b.score - a.score);
+    //   });`
+    this.storage.setMyScore(this.points);
+    console.log('end');
   }
 }

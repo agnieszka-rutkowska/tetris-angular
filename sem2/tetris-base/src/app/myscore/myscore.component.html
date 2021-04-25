@@ -1,1 +1,7 @@
-<p>myscore works!</p>
+<p>My score</p>
+<button (click)="sortPlayers()">Sort my score</button>
+<div *ngFor="let point of data, let i = index">
+    <div *ngIf="i < 10">
+        <b>{{i+1}}. </b> <span>{{point}}</span>
+    </div>
+</div>

@@ -14,7 +14,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {}
 
   submitForm(form: FormGroup) {
-    this.storage.checkToken(form.value.token).subscribe((result) => {
+    this.storage.checkToken(form.value.token).subscribe((result: any) => {
       console.log(result);
       if (result.success === true) {
         this.openGame();
