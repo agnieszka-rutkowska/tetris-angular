@@ -20,7 +20,7 @@ export class GameComponent implements OnInit, OnDestroy {
   public points = 0;
   public data: any;
   public isSortDesc = true;
-  @ViewChild('game') game: ElementRef;
+  @ViewChild('game') game: any;
   source = interval(30000);
   subscribeGetHightscore;
 
@@ -37,7 +37,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('#ngOnDestroy');
     this.subscribeGetHightscore.unsubscribe();
   }
 
@@ -50,7 +49,6 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   getHighScore() {
-    console.log('# ', Date().toString());
     this.storage.load().subscribe((result) => {
       this.data = result;
       this.data.sort((a, b) => b.score - a.score);
@@ -69,13 +67,12 @@ export class GameComponent implements OnInit, OnDestroy {
 
   endGame() {
     this.game.actionStop();
-    // this.storage
-    //   .saveScore(this.playerData.name, this.points, this.playerData.token)
-    //   .subscribe((result) => {
-    //     this.data = result;
-    //     this.data.sort((a, b) => b.score - a.score);
-    //   });`
+    this.storage
+      .saveScore(this.playerData.name, this.points, this.playerData.token)
+      .subscribe((result) => {
+        this.data = result;
+        this.data.sort((a, b) => b.score - a.score);
+      });
     this.storage.setMyScore(this.points);
-    console.log('end');
   }
 }
