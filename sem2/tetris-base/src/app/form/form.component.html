@@ -1,22 +1,24 @@
-<form [formGroup]="gameForm" (submit)="submitForm()">
+<div style="background: {{color}}">
+  <form [formGroup]="gameForm" (submit)="submitForm()">
 
-  <label>Your name:</label>
-  <input name="name" type="text" formControlName="email"/>
-  <div *ngIf="gameForm.controls.email.touched && gameForm.controls.email.valid === false">
-    Incorrect name
-  </div>
+    <label>Your name:</label>
+    <input name="name" type="text" formControlName="email"/>
+    <div *ngIf="gameForm.controls.email.touched && gameForm.controls.email.valid === false">
+      Incorrect name
+    </div>
 
-  <br/>
+    <br/>
 
-  <label>Your token:</label>
-  <input  name="token" type="text" formControlName="token"/>
-  <div *ngIf="gameForm.controls.token.touched && gameForm.controls.token.valid === false">
-    Token required
-  </div>
+    <label>Your token:</label>
+    <input  name="token" type="text" formControlName="token"/>
+    <div *ngIf="gameForm.controls.token.touched && gameForm.controls.token.valid === false">
+      Token required
+    </div>
 
-  <br/>
+    <br/>
 
-  <button type="submit" [disabled]="!gameForm.valid">
-    Start
-  </button>
-</form>
+    <button type="submit" [disabled]="!gameForm.valid">
+      Start
+    </button>
+  </form>
+</div>

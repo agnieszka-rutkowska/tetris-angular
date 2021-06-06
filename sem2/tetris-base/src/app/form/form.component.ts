@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { StorageService } from '../storage.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -9,7 +9,10 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  constructor(private router: Router, private storage: StorageService, public fb: FormBuilder) {}
+  public color = 'white';
+  constructor(private router: Router, private storage: StorageService, public fb: FormBuilder, private _route: ActivatedRoute) {
+    this.color = this._route.snapshot.params.color;
+  }
 
   ngOnInit(): void {}
 

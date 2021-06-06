@@ -21,6 +21,7 @@ import { MyscoreComponent } from './myscore/myscore.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'form', component: FormComponent },
+      { path: 'form/:color', component: FormComponent },
       { path: 'game', component: GameComponent },
       { path: '**', redirectTo: 'form' },
     ]),
