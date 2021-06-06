@@ -45,7 +45,6 @@ export class StorageService {
   saveScore(name: string, score: number, token: string) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      // 'Authorization': 'Bearer ' + token,
     });
     const body = { name: name, score: score };
     const options = { headers: headers };

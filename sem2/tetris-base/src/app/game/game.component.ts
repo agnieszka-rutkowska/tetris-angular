@@ -25,8 +25,7 @@ export class GameComponent implements OnInit, OnDestroy {
   subscribeGetHightscore;
 
   constructor(private router: Router, private storage: StorageService) {
-    // this.playerData = this.storage.readplayerData();
-    this.playerData = { name: 'aga', token: '1234' };
+    this.playerData = this.storage.readplayerData();
   }
 
   ngOnInit(): void {

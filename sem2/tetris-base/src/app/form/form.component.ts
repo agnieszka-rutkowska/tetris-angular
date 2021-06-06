@@ -25,6 +25,7 @@ export class FormComponent implements OnInit {
     this.storage.checkToken(this.gameForm.value.token).subscribe((result: any) => {
       if (result.success === true) {
         this.openGame();
+        this.storage.savePlayerData({name: this.gameForm.controls.email.value, token: this.gameForm.controls.token.value});
       } else {
         alert('Bład przy logowaniu');
       }

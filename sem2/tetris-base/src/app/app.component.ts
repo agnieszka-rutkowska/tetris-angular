@@ -11,8 +11,5 @@ export interface Player {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public player: Player;
-
   constructor() {}
-
 }
