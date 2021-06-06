@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import { GameComponent } from './game/game.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TetrisCoreModule } from 'ngx-tetris';
 import { RouterModule } from '@angular/router';
 import { ScoreComponent } from './score/score.component';
@@ -16,6 +16,7 @@ import { MyscoreComponent } from './myscore/myscore.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     TetrisCoreModule,
     HttpClientModule,
     RouterModule.forRoot([

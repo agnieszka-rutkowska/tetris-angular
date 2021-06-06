@@ -15,7 +15,4 @@ export class AppComponent {
 
   constructor() {}
 
-  public onFormSubmit(playerData) {
-    this.player = playerData;
-  }
 }
