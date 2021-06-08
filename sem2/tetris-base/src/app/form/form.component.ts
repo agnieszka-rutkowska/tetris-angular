@@ -38,4 +38,11 @@ export class FormComponent implements OnInit {
   openGame() {
     this.router.navigate(['/game']);
   }
+
+  redirectWithColor(color: string){
+    this.router.navigate(['/form/' + color])
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }
