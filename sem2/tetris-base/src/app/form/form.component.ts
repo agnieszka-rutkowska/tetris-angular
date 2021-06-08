@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
   }
 
   redirectWithColor(color: string){
-    this.router.navigate(['/form/' + color])
+    this.router.navigate(['/form/', color])
       .then(() => {
         window.location.reload();
       });
