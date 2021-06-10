@@ -13,7 +13,9 @@ export class MyscoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.data = this.storage.getMyScore();
-    this.data.sort((a, b) => b - a);
+    if(this.data){
+      this.data.sort((a, b) => b - a);
+    }
   }
 
   sortPlayers() {

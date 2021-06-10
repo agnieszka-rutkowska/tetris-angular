@@ -63,7 +63,7 @@ export class StorageService {
     let myscore: any;
     let tmp = localStorage.getItem('myscore');
     if (tmp === null) {
-      return myscore;
+      return [];
     }
     myscore = localStorage
       .getItem('myscore')

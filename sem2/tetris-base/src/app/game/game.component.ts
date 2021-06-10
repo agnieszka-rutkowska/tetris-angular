@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Player } from '../app.component';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { StorageService } from '../storage.service';
 import { interval } from 'rxjs';
 
@@ -23,8 +23,9 @@ export class GameComponent implements OnInit, OnDestroy {
   @ViewChild('game') game: any;
   source = interval(30000);
   subscribeGetHightscore;
+  queryParam: string;
 
-  constructor(private router: Router, private storage: StorageService) {
+  constructor(private router: Router, private storage: StorageService, private route: ActivatedRoute) {
     this.playerData = this.storage.readplayerData();
   }
 
@@ -33,10 +34,17 @@ export class GameComponent implements OnInit, OnDestroy {
       this.getHighScore()
     );
     this.getHighScore();
+    this.getQueryParam();
   }
 
   ngOnDestroy() {
     this.subscribeGetHightscore.unsubscribe();
+  }
+
+  getQueryParam(){
+    this.route.queryParams.subscribe(params => {
+      this.queryParam = params["queryParam"]
+    });
   }
 
   onLineCleared() {

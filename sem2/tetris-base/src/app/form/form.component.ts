@@ -36,7 +36,7 @@ export class FormComponent implements OnInit {
   }
 
   openGame() {
-    this.router.navigate(['/game']);
+    this.router.navigate(['/game'], {queryParams: {queryParam:"queryParamUsageExample"}});
   }
 
   redirectWithColor(color: string){
